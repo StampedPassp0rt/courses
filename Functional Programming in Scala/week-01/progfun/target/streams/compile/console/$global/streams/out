@@ -1,0 +1,36 @@
+[0m[[0mdebug[0m] [0mWaiting for threads to exit or System.exit to be called.[0m
+[0m[[0mdebug[0m] [0mWaiting for thread run-main-0 to terminate.[0m
+[0m[[0mdebug[0m] [0mGetting org.scala-sbt:compiler-interface:0.13.13:component from component compiler for Scala 2.12.1[0m
+[0m[[0minfo[0m] [0m'compiler-interface' not yet compiled for Scala 2.12.1. Compiling...[0m
+[0m[[0mdebug[0m] [0mPlain interface to Scala compiler 2.12.1  with arguments: [0m
+[0m[[0mdebug[0m] [0m	-nowarn[0m
+[0m[[0mdebug[0m] [0m	-d[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_3d04c80f[0m
+[0m[[0mdebug[0m] [0m	-bootclasspath[0m
+[0m[[0mdebug[0m] [0m	/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/classes:/Users/ameetrawtani/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.12.1.jar[0m
+[0m[[0mdebug[0m] [0m	-classpath[0m
+[0m[[0mdebug[0m] [0m	/Users/ameetrawtani/.sbt/boot/scala-2.10.6/org.scala-sbt/sbt/0.13.13/xsbti/interface-0.13.13.jar:/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_8e9e4ab/srcs/org.scala-sbt/compiler-interface/compiler-interface-0.13.13-sources.jar:/Users/ameetrawtani/.ivy2/cache/org.scala-lang/scala-compiler/jars/scala-compiler-2.12.1.jar:/Users/ameetrawtani/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.12.1.jar:/Users/ameetrawtani/.ivy2/cache/org.scala-lang.modules/scala-xml_2.12/bundles/scala-xml_2.12-1.0.6.jar:/Users/ameetrawtani/.ivy2/cache/jline/jline/jars/jline-2.14.1.jar[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/API.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/Analyzer.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/Command.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/Compat.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/CompilerInterface.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/ConsoleInterface.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/DelegatingReporter.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/Dependency.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/ExtractAPI.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/ExtractUsedNames.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/GlobalHelpers.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/LocateClassFile.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/Log.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/Message.scala[0m
+[0m[[0mdebug[0m] [0m	/var/folders/sh/vvjlz3vj1rqfpdzl_5gqxrww0000gn/T/sbt_df90dfdb/xsbt/ScaladocInterface.scala[0m
+[0m[[0minfo[0m] [0m  Compilation completed in 22.398 s[0m
+[0m[[0mdebug[0m] [0mGetting org.scala-sbt:compiler-interface:0.13.13:component from component compiler for Scala 2.12.1[0m
+[0m[[0minfo[0m] [0mStarting scala interpreter...[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0mdebug[0m] [0m	Thread run-main-0 exited.[0m
+[0m[[0mdebug[0m] [0mInterrupting remaining threads (should be all daemons).[0m
+[0m[[0mdebug[0m] [0mNot interrupting system thread Thread[process reaper,10,system][0m
+[0m[[0mdebug[0m] [0mSandboxed run complete..[0m
+[0m[[0mdebug[0m] [0mExited with code 0[0m
