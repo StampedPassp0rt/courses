@@ -33,37 +33,40 @@ def load_cows(filename):
 
 
 # Problem 1
+#Ultimately, I needed to make sure convoy was not just passed, but initialized.
+#I also needed to have the return at the end.
+#It apparently doesn't work in the if.
+#Could this be more consise? Certainly. I like the TA's while loop solution below.
+#But I also liked the recursive version here.
 
-def greedy_helper(sorted_cows, weight_limit, total_weight, trips):
+def greedy_helper(sorted_cows, weight_limit, convoy = []):
     #stop if already gone through list
-    current_trip = []
-    if len(sorted_cows) == 0:
-        return trips
-    for cow in sorted_cows:
-        if (total_weight + cow[0]) < 10:
-            #Append the cow to the current trip
-            current_trip.append(cow[1])
-            #Adjust weight
-            total_weight = cow[0]+total_weight
-        elif (total_weight+ cow[0]) == 10:
-            current_trip.append(cow[1])
-            trips.append(current_trip)
-            total_weight = 0
-            length_current = len(current_trip)
-            greedy_helper(sorted_cows[length_current:], 10, 0, trips)
-            break
-        elif (total_weight + cow[0]) > 10:
-            trips.append(current_trip)
-
-            length_current = len(current_trip)
-            current_trip = []
-            total_weight = 0
-            greedy_helper(sorted_cows[length_current:], 10, 0, trips)
-            break
-    if len(current_trip) != 0:
-        trips.append(current_trip)
-    return trips
-
+     available = weight_limit
+     convoy = convoy
+     total_weight = 0
+     ship = []
+     overage = []
+     if len(sorted_cows) == 0:
+         print ("Empty dictionary of cows")
+     for cow in sorted_cows:
+         if cow[0]<= available:
+             ship.append(cow[1])
+             #print (ship)
+             available = available - cow[0]
+             #print ("Available weight:", available)
+             
+         else:
+             overage.append(cow)
+             
+             #print ("Overage:", overage)
+     convoy.append(ship)
+     #print ("Convoy:", convoy)
+     if overage != []:
+         greedy_helper(overage, weight_limit, convoy)
+        
+     return convoy
+     
+        
 
 def greedy_cow_transport(cows,limit=10):
     """
@@ -94,13 +97,52 @@ def greedy_cow_transport(cows,limit=10):
 
 
     #trip result list
-    total_weight = 0
-    trips = []
-    trip_results = greedy_helper(list_cows, limit, total_weight, trips)
+    #The algorithm should start with the biggest cow
+    if list_cows == []:
+        trip_results = []
+    else:
+        trip_results = greedy_helper(list_cows, limit, [])   
     return trip_results
 
 
+def alt_greedy_cow_transport(cows,limit=10):
+    sortedCows = sorted(cows.items(), key = lambda x:x[1], reverse = True) 
+    results = []
+    counter = 0
+    trip = []
+    tripWeight = 0
 
+    while sortedCows != []:
+        curWeight = sortedCows[counter][1]
+
+        if curWeight > limit:
+            sortedCows.remove(sortedCows[counter])
+
+        elif (curWeight + tripWeight) <= limit:
+            trip.append(sortedCows[counter][0])
+            tripWeight += curWeight
+
+            sortedCows.remove(sortedCows[counter])
+            print ("Counter: ", counter)
+            if counter == (len(sortedCows)): # since the length of sortedCows goes down by 1 (an item is removed), 
+                counter -= 1                 # we need to add 1 to get the previous length, but 1 must be substracted
+                                             # to get the last index value, thus canceling out the ones
+        else:
+            if not (counter == (len(sortedCows) - 1)):
+                counter += 1
+            else:
+                results.append(trip)
+                counter = 0
+                trip = []
+                tripWeight = 0
+
+    if trip != []:
+        results.append(trip)
+
+    return results
+
+    
+    
 # Problem 2
 
 

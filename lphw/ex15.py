@@ -3,12 +3,12 @@
 from sys import argv
 
 #Getting filename to open
-script = argv
+script, filename = argv
 
-#txt = open(filename)
+txt = open(filename)
 
-#print "Here's your file %r:" % filename
-#print txt.read()
+print "Here's your file %r:" % filename
+print txt.read()
 
 print "Type the filename please: "
 file_again = raw_input("> ")
@@ -17,5 +17,5 @@ txt_again = open(file_again)
 
 print txt_again.read()
 
-#txt.close()
+txt.close()
 txt_again.close()
