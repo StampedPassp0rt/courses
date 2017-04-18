@@ -11,11 +11,11 @@ import pylab
 ##################
 
 # For Python 3.5:
-#from ps2_verify_movement35 import testRobotMovement
+from ps2_verify_movement35 import testRobotMovement
 # If you get a "Bad magic number" ImportError, you are not using Python 3.5 
 
 # For Python 3.6:
-from ps2_verify_movement36 import testRobotMovement
+#from ps2_verify_movement36 import testRobotMovement
 # If you get a "Bad magic number" ImportError, you are not using Python 3.6
 
 
@@ -81,8 +81,19 @@ class RectangularRoom(object):
 
         width: an integer > 0
         height: an integer > 0
+        
+        Clean/Dirty is a binary. Can Treat as True for Clean, False for Dirty.
+        Room Data: dictionary where the key is a tuple of (w,h), value is False 
+        initially.
+        
+       
         """
-        raise NotImplementedError
+        self.width = width
+        self.height = height
+        self.roomclean = {}
+        #Why not have this at the start?
+        self.tiles = self.getNumTiles()
+        #raise NotImplementedError
     
     def cleanTileAtPosition(self, pos):
         """
@@ -92,7 +103,9 @@ class RectangularRoom(object):
 
         pos: a Position
         """
-        raise NotImplementedError
+        int_pos = (math.floor(pos.getX()), math.floor(pos.getY()))
+        self.roomclean[int_pos] = True
+        #raise NotImplementedError
 
     def isTileCleaned(self, m, n):
         """
@@ -104,15 +117,25 @@ class RectangularRoom(object):
         n: an integer
         returns: True if (m, n) is cleaned, False otherwise
         """
-        raise NotImplementedError
+        if (m,n) not in self.roomclean:
+            self.roomclean[(m,n)] = False
+            return False
+        else:
+            return self.roomclean[(m,n)]
+            
+        #raise NotImplementedError
     
     def getNumTiles(self):
         """
         Return the total number of tiles in the room.
 
         returns: an integer
+        
+        Assume each tile is 1x1. Then a 4x4 room is 16 sq ft, or 16 tiles.
+        
         """
-        raise NotImplementedError
+        tiles = self.width * self.height
+        return tiles
 
     def getNumCleanedTiles(self):
         """
@@ -120,7 +143,12 @@ class RectangularRoom(object):
 
         returns: an integer
         """
-        raise NotImplementedError
+        self.cleantiles = 0
+        for tile in self.roomclean.keys():
+            if self.roomclean[tile] == True:
+                self.cleantiles += 1
+        return self.cleantiles
+        #raise NotImplementedError
 
     def getRandomPosition(self):
         """
@@ -128,7 +156,15 @@ class RectangularRoom(object):
 
         returns: a Position object.
         """
-        raise NotImplementedError
+        #Take the width and height of room, and generate random width/height
+        #constained by these.
+        #random.seed(0)
+        width_pos = round(random.uniform(0,self.width),2)
+        #random.seed(0)
+        height_pos = round(random.uniform(0,self.height), 2)
+        self.randompos = Position(width_pos, height_pos)
+        return self.randompos
+        
 
     def isPositionInRoom(self, pos):
         """
@@ -137,7 +173,12 @@ class RectangularRoom(object):
         pos: a Position object.
         returns: True if pos is in the room, False otherwise.
         """
-        raise NotImplementedError
+        posX = pos.getX()
+        posY = pos.getY()
+        if (0 <= posX < self.width) and (0 <= posY < self.height):
+            return True
+        else:
+            return False
 
 
 # === Problem 2
@@ -160,7 +201,13 @@ class Robot(object):
         room:  a RectangularRoom object.
         speed: a float (speed > 0)
         """
-        raise NotImplementedError
+        self.room = room
+        self.speed = speed
+        self.init_pos = room.getRandomPosition()
+        self.room.cleanTileAtPosition(self.init_pos)
+        self.current_pos = self.init_pos
+        self.current_dir = 0
+        self.time_clean = 0
 
     def getRobotPosition(self):
         """
@@ -168,7 +215,8 @@ class Robot(object):
 
         returns: a Position object giving the robot's position.
         """
-        raise NotImplementedError
+        return self.current_pos
+        
     
     def getRobotDirection(self):
         """
@@ -177,7 +225,7 @@ class Robot(object):
         returns: an integer d giving the direction of the robot as an angle in
         degrees, 0 <= d < 360.
         """
-        raise NotImplementedError
+        return self.current_dir
 
     def setRobotPosition(self, position):
         """
@@ -185,7 +233,8 @@ class Robot(object):
 
         position: a Position object.
         """
-        raise NotImplementedError
+        self.current_pos = position
+       
 
     def setRobotDirection(self, direction):
         """
@@ -193,7 +242,7 @@ class Robot(object):
 
         direction: integer representing an angle in degrees
         """
-        raise NotImplementedError
+        self.current_dir = direction
 
     def updatePositionAndClean(self):
         """
@@ -202,6 +251,8 @@ class Robot(object):
         Move the robot to a new position and mark the tile it is on as having
         been cleaned.
         """
+        #self.time_clean += 1
+        #self.current_pos = self.current_pos.getNewPosition(self.current_dir, self.speed)
         raise NotImplementedError # don't change this!
 
 
@@ -221,11 +272,21 @@ class StandardRobot(Robot):
         Move the robot to a new position and mark the tile it is on as having
         been cleaned.
         """
-        raise NotImplementedError
+        self.time_clean += 1
+        eval_pos = self.current_pos.getNewPosition(self.current_dir, self.speed)
+        if self.room.isPositionInRoom(eval_pos):
+            self.current_pos = eval_pos
+            self.room.cleanTileAtPosition(self.current_pos)
+        else:
+            self.time_clean += 1
+            new_angle = random.randint(0, 360)
+            self.setRobotDirection(new_angle)
+            
+        #raise NotImplementedError
 
 
 # Uncomment this line to see your implementation of StandardRobot in action!
-##testRobotMovement(StandardRobot, RectangularRoom)
+testRobotMovement(StandardRobot, RectangularRoom)
 
 
 # === Problem 4
