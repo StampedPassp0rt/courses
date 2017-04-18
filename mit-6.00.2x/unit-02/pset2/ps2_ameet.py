@@ -286,7 +286,7 @@ class StandardRobot(Robot):
 
 
 # Uncomment this line to see your implementation of StandardRobot in action!
-testRobotMovement(StandardRobot, RectangularRoom)
+#testRobotMovement(StandardRobot, RectangularRoom)
 
 
 # === Problem 4
@@ -297,6 +297,32 @@ def runCleanRoom(num_robots, speed, width, height, min_coverage, robot_type):
     Returns the number of time-steps needed to clean the faction MIN_COVERAGE
     of the room.
     """
+    #Some code to liberate from using roomclean dict from my RectangularRoom class.
+    
+    
+    dict_robots = {}
+    room_to_clean = RectangularRoom(width, height)
+    for i in range(num_robots):
+        dict_robots[i] = robot_type(room_to_clean, speed)
+    time_to_clean = 0
+    init_clean_tiles = room_to_clean.getNumCleanedTiles()
+    coverage = init_clean_tiles/room_to_clean.getNumTiles()
+    
+    while coverage < min_coverage:
+        time_to_clean += 1
+        
+        [dict_robots[i].updatePositionAndClean() for i in range(num_robots)]
+        init_clean_tiles = room_to_clean.getNumCleanedTiles()
+        coverage = init_clean_tiles/room_to_clean.getNumTiles()
+    #    print ("# of iterations:", time_to_clean, coverage)
+   
+    #print ("Done! ", time_to_clean)
+  
+    
+    """
+    #First solution I did, forgetting that there was the 
+    getNumCleanedTiles() method for the RectangularRoom class.
+    
     dict_robots = {}
     room_to_clean = RectangularRoom(width, height)
     for i in range(num_robots):
@@ -312,6 +338,7 @@ def runCleanRoom(num_robots, speed, width, height, min_coverage, robot_type):
         coverage = len(init_clean_tiles)/room_to_clean.tiles
         #print ("# of iterations:", time_to_clean, coverage)
     #print ("Done! ", time_to_clean)
+    """
     return time_to_clean
     
                   
@@ -359,8 +386,18 @@ class RandomWalkRobot(Robot):
         Move the robot to a new position and mark the tile it is on as having
         been cleaned.
         """
-        raise NotImplementedError
-
+        eval_pos = self.current_pos.getNewPosition(self.current_dir, self.speed)
+        if self.room.isPositionInRoom(eval_pos):
+            self.current_pos = eval_pos
+            self.room.cleanTileAtPosition(self.current_pos)
+            new_angle = random.randint(0,360)
+            self.setRobotDirection(new_angle)
+        else:
+            
+            new_angle = random.randint(0, 360)
+            self.setRobotDirection(new_angle)
+        
+      
 
 def showPlot1(title, x_label, y_label):
     """
